@@ -11,6 +11,21 @@
                 <div class="container">
                     <div class="card mt-3 mb-3">
                         <div class="card-header">
+                            @if (Session::has('success'))
+                            <div class="alert alert-success">
+                                <ul class="list-group">
+                                    <li class="list-group-item">{{ Session::get('success') }}</li>
+                                </ul>
+                            </div>
+                            @elseif ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="list-group">
+                                    @foreach($errors->all() as $error)
+                                    <li class="list-group-item">{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('loans.store') }}">

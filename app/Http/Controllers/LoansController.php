@@ -2,10 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Loan\LoanService;
+use App\Http\Requests\CreateLoanRequest;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
 {
+    /**
+     * @var LoanService
+     */
+    private LoanService $loanService;
+
+    /**
+     * LoansController constructor.
+     * @param LoanService $loanService
+     */
+    public function __construct(LoanService $loanService)
+    {
+        $this->loanService = $loanService;
+    }
+
     /**
     * Display a listing of the resource.
     *
@@ -38,9 +55,11 @@ class LoansController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(CreateLoanRequest $request)
     {
-        dd($request->all());
+        $loan = $this->loanService->createLoan(
+            $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id]))
+        );
     }
 
     /**
