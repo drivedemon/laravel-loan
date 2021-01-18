@@ -5,19 +5,20 @@ namespace App\Http\Controllers;
 use App\Domain\Loan\LoanService;
 use App\Http\Requests\CreateLoanRequest;
 use App\Models\Loan;
+use Exception;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
 {
     /**
-     * @var LoanService
-     */
+    * @var LoanService
+    */
     private LoanService $loanService;
 
     /**
-     * LoansController constructor.
-     * @param LoanService $loanService
-     */
+    * LoansController constructor.
+    * @param LoanService $loanService
+    */
     public function __construct(LoanService $loanService)
     {
         $this->loanService = $loanService;
@@ -54,12 +55,19 @@ class LoansController extends Controller
     *
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
+    * @throws Exception
     */
     public function store(CreateLoanRequest $request)
     {
-        $loan = $this->loanService->createLoan(
-            $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id]))
-        );
+        try {
+            $loan = $this->loanService->createLoan(
+                $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id]))
+            );
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+
+        return view('loans.index');
     }
 
     /**
