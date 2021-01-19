@@ -3,7 +3,7 @@
 namespace App\Domain\Loan;
 
 use App\Models\Loan;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
 * Class LoanRepository
@@ -37,6 +37,14 @@ class LoanRepository
     public function deleteLoan(string $loanId): bool
     {
         return Loan::destroy($loanId);
+    }
+
+    /**
+    * @return Collection
+    */
+    public function getLoans(): Collection
+    {
+        return Loan::all();
     }
 
     /**

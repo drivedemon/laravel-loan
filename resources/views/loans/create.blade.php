@@ -49,7 +49,7 @@
                                 </div>
                                 <label for="rate">{{ __('Interest Rate') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="rate" value="{{ $loan->rate ?? '' }}">
+                                    <input type="number" class="form-control" name="rate" step=".01" min="0" value="{{ $loan->rate ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
@@ -61,18 +61,26 @@
                                             <option value="">-</option>
                                             @foreach($months as $index => $month)
                                             @php ($index++)
-                                            <option value="{{ $index }}" {{ $loan->start_month == $index ? 'selected' : '-' }}>
-                                                {{ $month }}
-                                            </option>
+                                            <option value="{{ $index }}"
+                                                @if (isset($loan))
+                                                    @if ($loan->start_month == $index)
+                                                        selected
+                                                    @endif
+                                                @endif
+                                            >{{ $month }}</option>
                                             @endforeach
                                         </select>
                                         <div class="col-1"></div>
                                         <select class="col-5 custom-select" name="start_year">
                                             <option value="">-</option>
                                             @foreach($years as $index => $year)
-                                            <option value="{{ $year }}" {{ $loan->start_year == $year ? 'selected' : '-' }}>
-                                                {{ $year }}
-                                            </option>
+                                            <option value="{{ $year }}"
+                                                @if (isset($loan))
+                                                    @if ($loan->start_year == $year)
+                                                        selected
+                                                    @endif
+                                                @endif
+                                            >{{ $year }}</option>
                                             @endforeach
                                         </select>
                                     </div>

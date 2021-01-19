@@ -31,7 +31,11 @@ class LoansController extends Controller
     */
     public function index()
     {
-        return view('loans.index');
+        return view('loans.index',
+            [
+                'loans' => $this->loanService->getLoans(),
+            ]
+        );
     }
 
     /**
@@ -66,7 +70,7 @@ class LoansController extends Controller
             return redirect()->back()->withErrors($e);
         }
 
-        return view('loans.index');
+        return view('loans.show');
     }
 
     /**
@@ -79,6 +83,7 @@ class LoansController extends Controller
     {
         $loan = $this->loanService->getLoanById($id);
         $rePayment = $this->loanService->pmtCalculate($loan);
+
         return view('loans.show',
             [
                 'loans' => $loan,

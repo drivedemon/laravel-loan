@@ -18,24 +18,29 @@
                                 <thead>
                                     <tr>
                                         <th style="width:5%;">ID</th>
-                                        <th style="width:30%;">Loan Amount</th>
+                                        <th style="width:20%;">Loan Amount</th>
                                         <th style="width:20%;">Loan Term</th>
                                         <th style="width:15%;">Interest Rate</th>
-                                        <th style="width:10%;">Created at</th>
+                                        <th style="width:20%;">Created at</th>
                                         <th style="width:20%;">Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <td>1</td>
-                                        <td>10000</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
+                                    @foreach($loans as $index => $loan)
+                                    @php ($index++)
+                                    <tr>
+                                        <td>{{ $index }}</td>
+                                        <td>{{ $loan->amount }} ฿</td>
+                                        <td>{{ $loan->term }} Years</td>
+                                        <td>{{ round($loan->rate, 2) }} %</td>
+                                        <td>{{ $loan->created_at }}</td>
                                         <td>
                                             <a href="{{ route('loans.show', 1) }}" class="btn btn-sm btn-info">View</a>
                                             <a href="{{ route('loans.edit', 1) }}" class="btn btn-sm btn-success">Edit</a>
                                             <a href="{{ route('loans.destroy', 1) }}" class="btn btn-sm btn-danger">Delete</a>
                                         </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

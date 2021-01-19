@@ -3,6 +3,7 @@
 namespace App\Domain\Loan;
 
 use App\Models\Loan;
+use Illuminate\Database\Eloquent\Collection;
 
 class LoanService
 {
@@ -38,6 +39,14 @@ class LoanService
     public function createLoan(array $loan): Loan
     {
         return $this->repository->createLoan($loan);
+    }
+
+    /**
+    * @return Collection
+    */
+    public function getLoans(): Collection
+    {
+        return $this->repository->getLoans();
     }
 
     /**
