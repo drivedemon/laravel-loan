@@ -27,13 +27,17 @@ class LoansController extends Controller
     /**
     * Display a listing of the resource.
     *
+    * @param  Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function index()
+    public function index(Request $request)
     {
+        $loan = $this->loanService->getLoans();
+        // TODO: integrate seach filter
+        
         return view('loans.index',
             [
-                'loans' => $this->loanService->getLoans()->paginate(10),
+                'loans' => $loan->paginate(30),
             ]
         );
     }

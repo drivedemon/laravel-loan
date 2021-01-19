@@ -28,8 +28,52 @@
                     <div class="card mt-3 mb-3">
                         <div class="card-header">
                             <a href="{{ route('loans.create') }}" class="btn btn-primary">Add New Loan</a>
+                            <a class="btn btn-dark float-right" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Advanced Search
+                            </a>
                         </div>
                         <div class="card-body">
+                            @php ($checkQuery = isset($_GET['min_amount']) ? 'show' : '-')
+                            <div class="collapse {{ $checkQuery }}" id="collapseExample">
+                                <div class="card-header font-weight-bold">
+                                    Advanced Search
+                                </div>
+                                <div class="card card-body">
+                                    <form action="{{route('loans.index')}}" method="get">
+                                        @csrf
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 font-weight-bold">Loan Amount(THB)</label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-1 font-weight-bold">Min:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="10000" name="min_amount" value="{{ $_GET['min_amount'] ?? '-' }}">
+                                            <label class="col-sm-1 font-weight-bold">Max:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="100000000" name="max_amount" value="{{ $_GET['max_amount'] ?? '-' }}">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 font-weight-bold">Interest Rate(%)</label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-1 font-weight-bold">Min:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="1" name="min_rate" value="{{ $_GET['min_rate'] ?? '-' }}">
+                                            <label class="col-sm-1 font-weight-bold">Max:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="100" name="max_rate" value="{{ $_GET['max_rate'] ?? '-' }}">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 font-weight-bold">Payment Amount</label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-1 font-weight-bold">Min:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="1000" name="min_rate" value="{{ $_GET['min_rate'] ?? '-' }}">
+                                            <label class="col-sm-1 font-weight-bold">Max:</label>
+                                            <input type="number" class="col-sm-2 form-control" placeholder="50000" name="max_rate" value="{{ $_GET['max_rate'] ?? '-' }}">
+                                        </div>
+
+                                        <input type="submit" name="Search" value="Search" title="Search" class="btn btn-sm btn-secondary">
+                                    </form>
+                                </div>
+                                <br>
+                            </div>
                             <table class="table table-hover" style="width:100%;">
                                 <thead>
                                     <tr>

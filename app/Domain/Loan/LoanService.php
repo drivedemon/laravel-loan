@@ -50,6 +50,16 @@ class LoanService
     }
 
     /**
+    * @param array $loan
+    * @return Builder
+    */
+    public function filterLoans(): Builder
+    {
+        // TODO: implement search filter
+        return $this->repository->filterLoans();
+    }
+
+    /**
     * @param string $loanId
     * @return Loan
     */

@@ -49,6 +49,14 @@ class LoanRepository
     }
 
     /**
+    * @return Builder
+    */
+    public function filterLoans(): Builder
+    {
+        // TODO: implement search filter
+    }
+
+    /**
     * @param string $loanId
     * @return Loan
     */
