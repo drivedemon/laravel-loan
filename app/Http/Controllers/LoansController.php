@@ -82,12 +82,12 @@ class LoansController extends Controller
     public function show($id)
     {
         $loan = $this->loanService->getLoanById($id);
-        $rePayment = $this->loanService->pmtCalculate($loan);
+        $rePayments = $this->loanService->pmtCalculate($loan);
 
         return view('loans.show',
             [
-                'loans' => $loan,
-                'rePayment' => $rePayment
+                'loan' => $loan,
+                'rePayments' => $rePayments
             ]
         );
     }

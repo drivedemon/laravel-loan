@@ -86,12 +86,8 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-end mt-4">
-                                    <x-jet-button class="btn-primary">
-                                        {{ isset($loan) ? __('Update') : __('Create') }}
-                                    </x-jet-button>
-                                    <x-jet-button class="btn-secondary ml-2" href="{{ route('loans.index') }}">
-                                        {{ __('Back') }}
-                                    </x-jet-nav-link>
+                                    <button type="submit" class="btn btn-primary">{{ isset($loan) ? __('Update') : __('Create') }}</button>
+                                    <a href="{{ route('loans.index') }}" class="btn btn-secondary ml-2">Back</a>
                                 </div>
                             </form>
                         </div>
