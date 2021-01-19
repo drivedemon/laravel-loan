@@ -35,9 +35,9 @@
                                         <td>{{ round($loan->rate, 2) }} %</td>
                                         <td>{{ $loan->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('loans.show', 1) }}" class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ route('loans.edit', 1) }}" class="btn btn-sm btn-success">Edit</a>
-                                            <a href="{{ route('loans.destroy', 1) }}" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="{{ route('loans.show', $loan->id) }}" class="btn btn-sm btn-info">View</a>
+                                            <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                            <a href="{{ route('loans.destroy', $loan->id) }}" class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

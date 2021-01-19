@@ -70,7 +70,10 @@ class LoansController extends Controller
             return redirect()->back()->withErrors($e);
         }
 
-        return view('loans.show');
+        Session()->flash('success', 'Created successfully');
+        return redirect()->action(
+            [LoansController::class, 'show'], $loan->id
+        );
     }
 
     /**
@@ -129,7 +132,10 @@ class LoansController extends Controller
             return redirect()->back()->withErrors($e);
         }
 
-        return view('loans.index');
+        Session()->flash('success', 'Updated successfully');
+        return redirect()->action(
+            [LoansController::class, 'show'], $loanModel->id
+        );
     }
 
     /**
@@ -140,6 +146,13 @@ class LoansController extends Controller
     */
     public function destroy($id)
     {
-        dd($id);
+        try {
+            $this->loanService->deleteLoan($id);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+
+        Session()->flash('success', 'Deleted successfully');
+        return view('loans.index');
     }
 }
