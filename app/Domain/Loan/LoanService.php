@@ -3,7 +3,7 @@
 namespace App\Domain\Loan;
 
 use App\Models\Loan;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 class LoanService
 {
@@ -42,9 +42,9 @@ class LoanService
     }
 
     /**
-    * @return Collection
+    * @return Builder
     */
-    public function getLoans(): Collection
+    public function getLoans(): Builder
     {
         return $this->repository->getLoans();
     }

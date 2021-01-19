@@ -3,7 +3,8 @@
 namespace App\Domain\Loan;
 
 use App\Models\Loan;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
 * Class LoanRepository
@@ -40,11 +41,11 @@ class LoanRepository
     }
 
     /**
-    * @return Collection
+    * @return Builder
     */
-    public function getLoans(): Collection
+    public function getLoans(): Builder
     {
-        return Loan::all();
+        return Loan::whereNotNull(Loan::USER_ID);
     }
 
     /**

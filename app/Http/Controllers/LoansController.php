@@ -33,7 +33,7 @@ class LoansController extends Controller
     {
         return view('loans.index',
             [
-                'loans' => $this->loanService->getLoans(),
+                'loans' => $this->loanService->getLoans()->paginate(10),
             ]
         );
     }
