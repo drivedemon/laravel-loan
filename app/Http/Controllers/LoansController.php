@@ -153,6 +153,8 @@ class LoansController extends Controller
         }
 
         Session()->flash('success', 'Deleted successfully');
-        return view('loans.index');
+        return redirect()->action(
+            [LoansController::class, 'index']
+        );
     }
 }

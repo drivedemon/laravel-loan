@@ -5,6 +5,22 @@
         </h2>
     </x-slot>
 
+    @if (Session::has('success'))
+    <div class="alert alert-success">
+        <ul class="list-group">
+            <li class="list-group-item">{{ Session::get('success') }}</li>
+        </ul>
+    </div>
+    @elseif ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="list-group">
+            @foreach($errors->all() as $error)
+            <li class="list-group-item">{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -35,9 +51,13 @@
                                         <td>{{ round($loan->rate, 2) }} %</td>
                                         <td>{{ $loan->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('loans.show', $loan->id) }}" class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                            <a href="{{ route('loans.destroy', $loan->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                            <form class="delete_form" action="{{route('loans.destroy', $loan->id)}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <a href="{{ route('loans.show', $loan->id) }}" class="btn btn-sm btn-info">View</a>
+                                                <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                                <input type="submit" name="Delete" value="Delete" title="Delete" class="btn btn-sm btn-danger">
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -50,4 +70,15 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.delete_form').on('submit', function() {
+            if (confirm('Confirm to delete!')) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+    })
+    </script>
 </x-app-layout>

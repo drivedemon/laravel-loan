@@ -19,6 +19,7 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
