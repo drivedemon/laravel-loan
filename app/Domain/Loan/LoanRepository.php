@@ -22,6 +22,34 @@ class LoanRepository
 
     /**
     * @param array $loan
+    * @param Loan $loanModel
+    * @return bool
+    */
+    public function updateLoan(array $loan, Loan $loanModel): bool
+    {
+        return $loanModel->update($loan);
+    }
+
+    /**
+    * @param string $loanId
+    * @return bool
+    */
+    public function deleteLoan(string $loanId): bool
+    {
+        return Loan::destroy($loanId);
+    }
+
+    /**
+    * @param string $loanId
+    * @return Loan
+    */
+    public function getLoanById(string $loanId): Loan
+    {
+        return Loan::find($loanId);
+    }
+
+    /**
+    * @param array $loan
     * @return Loan
     */
     public function mapLoan(array $loan): array

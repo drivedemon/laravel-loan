@@ -28,25 +28,28 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('loans.store') }}">
+                            <form action="{{ isset($loan) ? route('loans.update', $loan->id) : route('loans.store') }}" method="post">
                                 @csrf
+                                @if (isset($loan))
+                                @method('put')
+                                @endif
                                 <label for="loan_amount">{{ __('Loan Amount') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="loan_amount">
+                                    <input type="number" class="form-control" name="loan_amount" value="{{ $loan->amount ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">฿</span>
                                     </div>
                                 </div>
                                 <label for="loan_term">{{ __('Loan Term') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="loan_term">
+                                    <input type="number" class="form-control" name="loan_term" value="{{ $loan->term ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">Years</span>
                                     </div>
                                 </div>
                                 <label for="rate">{{ __('Interest Rate') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="rate">
+                                    <input type="number" class="form-control" name="rate" value="{{ $loan->rate ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
@@ -57,7 +60,8 @@
                                         <select class="col-5 custom-select" name="start_month">
                                             <option value="">-</option>
                                             @foreach($months as $index => $month)
-                                            <option value="{{ $index + 1 }}">
+                                            @php ($index++)
+                                            <option value="{{ $index }}" {{ $loan->start_month == $index ? 'selected' : '-' }}>
                                                 {{ $month }}
                                             </option>
                                             @endforeach
@@ -66,7 +70,7 @@
                                         <select class="col-5 custom-select" name="start_year">
                                             <option value="">-</option>
                                             @foreach($years as $index => $year)
-                                            <option value="{{ $year }}">
+                                            <option value="{{ $year }}" {{ $loan->start_year == $year ? 'selected' : '-' }}>
                                                 {{ $year }}
                                             </option>
                                             @endforeach
@@ -75,7 +79,7 @@
                                 </div>
                                 <div class="flex items-center justify-end mt-4">
                                     <x-jet-button class="btn-primary">
-                                        {{ __('Create') }}
+                                        {{ isset($loan) ? __('Update') : __('Create') }}
                                     </x-jet-button>
                                     <x-jet-button class="btn-secondary ml-2" href="{{ route('loans.index') }}">
                                         {{ __('Back') }}

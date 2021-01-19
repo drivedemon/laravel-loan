@@ -26,7 +26,7 @@ class CreateLoanRequest extends FormRequest
         return [
             'loan_amount' => 'required|between:1000,100000000|numeric',
             'loan_term' => 'required|between:1,50|numeric',
-            'rate' => 'required|between:0,36.00|numeric',
+            'rate' => 'required|between:1.00,36.00|numeric',
             'start_month' => 'required|between:1,12|numeric',
             'start_year' => 'required|between:2017,2050|numeric',
         ];

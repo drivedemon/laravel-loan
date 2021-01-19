@@ -41,19 +41,18 @@ class LoansController extends Controller
     */
     public function create()
     {
-        $months = [];
-        foreach (range(1, 12) as $month) {
-            $months[] = date('F',  mktime(0, 0, 0, $month, 1));
-        }
-        $years = range(2017, 2050);
-
-        return view('loans.create', ['months' => $months, 'years' => $years]);
+        return view('loans.create',
+            [
+                'months' => $this->loanService->getMonthScope(),
+                'years' => $this->loanService->getYearScope()
+            ]
+        );
     }
 
     /**
     * Store a newly created resource in storage.
     *
-    * @param  \Illuminate\Http\Request  $request
+    * @param  App\Http\Requests\CreateLoanRequest  $request
     * @return \Illuminate\Http\Response
     * @throws Exception
     */
@@ -78,7 +77,14 @@ class LoansController extends Controller
     */
     public function show($id)
     {
-        return view('loans.show');
+        $loan = $this->loanService->getLoanById($id);
+        $rePayment = $this->loanService->pmtCalculate($loan);
+        return view('loans.show',
+            [
+                'loans' => $loan,
+                'rePayment' => $rePayment
+            ]
+        );
     }
 
     /**
@@ -89,19 +95,36 @@ class LoansController extends Controller
     */
     public function edit($id)
     {
-        return view('loans.create');
+        return view('loans.create',
+            [
+                'loan' => $this->loanService->getLoanById($id),
+                'months' => $this->loanService->getMonthScope(),
+                'years' => $this->loanService->getYearScope()
+            ]
+        );
     }
 
     /**
     * Update the specified resource in storage.
     *
-    * @param  \Illuminate\Http\Request  $request
+    * @param  App\Http\Requests\CreateLoanRequest  $request
     * @param  int  $id
     * @return \Illuminate\Http\Response
+    * @throws Exception
     */
-    public function update(Request $request, $id)
+    public function update(CreateLoanRequest $request, $id)
     {
-        dd($request->all());
+        try {
+            $loanModel = $this->loanService->getLoanById($id);
+            $this->loanService->updateLoan(
+                $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id])),
+                $loanModel
+            );
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+
+        return view('loans.index');
     }
 
     /**
