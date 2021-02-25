@@ -34,7 +34,7 @@ class LoansController extends Controller
     {
         $loan = $this->loanService->getLoans();
         // TODO: integrate seach filter
-        
+
         return view('loans.index',
             [
                 'loans' => $loan->paginate(30),

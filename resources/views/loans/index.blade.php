@@ -33,7 +33,7 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            @php ($checkQuery = isset($_GET['min_amount']) ? 'show' : '-')
+                            @php ($checkQuery = request()->get('min_amount') ? 'show' : '-')
                             <div class="collapse {{ $checkQuery }}" id="collapseExample">
                                 <div class="card-header font-weight-bold">
                                     Advanced Search
@@ -46,27 +46,27 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-1 font-weight-bold">Min:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="10000" name="min_amount" value="{{ $_GET['min_amount'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="10000" name="min_amount" value="{{ request()->get('min_amount') ?? '-' }}">
                                             <label class="col-sm-1 font-weight-bold">Max:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="100000000" name="max_amount" value="{{ $_GET['max_amount'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="100000000" name="max_amount" value="{{ request()->get('max_amount') ?? '-' }}">
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-12 font-weight-bold">Interest Rate(%)</label>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-1 font-weight-bold">Min:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="1" name="min_rate" value="{{ $_GET['min_rate'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="1" name="min_rate" value="{{ request()->get('min_rate') ?? '-' }}">
                                             <label class="col-sm-1 font-weight-bold">Max:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="100" name="max_rate" value="{{ $_GET['max_rate'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="100" name="max_rate" value="{{ request()->get('max_rate') ?? '-' }}">
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-12 font-weight-bold">Payment Amount</label>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-1 font-weight-bold">Min:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="1000" name="min_rate" value="{{ $_GET['min_rate'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="1000" name="min_rate" value="{{ request()->get('min_rate') ?? '-' }}">
                                             <label class="col-sm-1 font-weight-bold">Max:</label>
-                                            <input type="number" class="col-sm-2 form-control" placeholder="50000" name="max_rate" value="{{ $_GET['max_rate'] ?? '-' }}">
+                                            <input type="number" class="col-sm-2 form-control" placeholder="50000" name="max_rate" value="{{ request()->get('max_rate') ?? '-' }}">
                                         </div>
 
                                         <input type="submit" name="Search" value="Search" title="Search" class="btn btn-sm btn-secondary">

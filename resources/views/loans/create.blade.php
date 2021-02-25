@@ -60,7 +60,6 @@
                                         <select class="col-5 custom-select" name="start_month">
                                             <option value="">-</option>
                                             @foreach($months as $index => $month)
-                                            @php ($index++)
                                             <option value="{{ $index }}"
                                                 @if (isset($loan))
                                                     @if ($loan->start_month == $index)

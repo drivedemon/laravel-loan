@@ -110,7 +110,6 @@ class LoanService
         $paymentAmount = $initAmount / $divideAmount;
 
         for ($i = 1; $i <= $termYear; $i++) {
-            $startMonth--;
             $previousBalance = $currentBalance ?? $amount;
             $currentMonth = $months[$startMonth];
             $currentDate = "$currentMonth $startYear";
@@ -128,11 +127,11 @@ class LoanService
 
                 ]
             );
-            if ($startMonth == 11) {
+            if ($startMonth == 12) {
                 $startMonth = 1;
                 $startYear++;
             } else {
-                $startMonth += 2;
+                $startMonth++;
             }
         }
         $schedulePayment[count($schedulePayment) - 1]['balance'] = 0;
@@ -147,7 +146,7 @@ class LoanService
     {
         $months = [];
         foreach (range(1, 12) as $month) {
-            $months[] = date('F',  mktime(0, 0, 0, $month, 1));
+            $months[$month] = date('F',  mktime(0, 0, 0, $month, 1));
         }
         return $months;
     }
