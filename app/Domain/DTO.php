@@ -21,8 +21,6 @@ class DTO
             return;
         }
         $data = $payload instanceof Request ? $payload->all() : $payload;
-        dd($payload->all());
-        // dd({user_id: 1}.toArray());
 
         $attributes = array_keys(get_object_vars($this));
         foreach ($data as $key => $value) {

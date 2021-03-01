@@ -22,10 +22,8 @@ class LoansController extends Controller
     */
     public function __construct(LoanService $loanService)
     {
-        // ddd(\Auth::user());
         parent::__construct();
         $this->loanService = $loanService;
-        // $this->currentUser = \Auth::user();
     }
 
     /**
@@ -36,7 +34,6 @@ class LoansController extends Controller
     */
     public function index(Request $request)
     {
-        dd($this->currentUser);
         $loan = $this->loanService->getLoans();
         // TODO: integrate seach filter
 
@@ -71,21 +68,17 @@ class LoansController extends Controller
     */
     public function store(CreateLoanRequest $request)
     {
-        // dd($request);
-        $loan = New LoanDTO(array_merger($request->except('_token'), ['user_id' => \Auth::user()->id]));
-        // dd($loan);
-        // try {
-        //     $loan = $this->loanService->createLoan(
-        //         $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id]))
-        //     );
-        // } catch (Exception $e) {
-        //     return redirect()->back()->withErrors($e);
-        // }
-        //
-        // Session()->flash('success', 'Created successfully');
-        // return redirect()->action(
-        //     [LoansController::class, 'show'], $loan->id
-        // );
+        $loan = New LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
+        try {
+            $loan = $this->loanService->createLoan($loan);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+
+        Session()->flash('success', 'Created successfully');
+        return redirect()->action(
+            [LoansController::class, 'show'], $loan->id
+        );
     }
 
     /**
