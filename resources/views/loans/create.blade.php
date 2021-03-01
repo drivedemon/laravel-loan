@@ -49,7 +49,7 @@
                                 </div>
                                 <label for="rate">{{ __('Interest Rate') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="rate" step=".01" min="0" value="{{ $loan->rate ?? '' }}">
+                                    <input type="number" class="form-control" name="interest_rate" step=".01" min="0" value="{{ $loan->rate ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
