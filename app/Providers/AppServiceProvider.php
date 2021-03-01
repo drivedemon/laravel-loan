@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Domain\Loan\LoanRepository;
-use App\Domain\Loan\LoanService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,9 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(LoanService::class, function () {
-            return new LoanService(new LoanRepository());
-        });
+        $this->app->bind(
+            'App\Domain\Loan\LoanRepositoryInterface',
+            'App\Domain\Loan\LoanRepository'
+        );
     }
 
     /**

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 * Class LoanRepository
 * @package App\Domain\Loan
 */
-class LoanRepository
+class LoanRepository implements LoanRepositoryInterface
 {
     /**
     * @param array $loan

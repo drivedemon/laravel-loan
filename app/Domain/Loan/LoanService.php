@@ -9,16 +9,16 @@ class LoanService
 {
 
     /**
-    * @var LoanRepository
+    * @var LoanRepositoryInterface
     */
-    private LoanRepository $repository;
+    private LoanRepositoryInterface $repository;
 
 
     /**
      * LoanService constructor.
-     * @param LoanRepository $repository
+     * @param LoanRepositoryInterface $repository
      */
-    public function __construct(LoanRepository $repository)
+    public function __construct(LoanRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
