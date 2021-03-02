@@ -87,19 +87,19 @@ class LoanService
     }
 
     /**
-     * @param Loan $loanModel
+     * @param LoanDTO $loan
      * @return array
      */
-    public function pmtCalculate(Loan $loanModel): array
+    public function pmtCalculate(LoanDTO $loan): array
     {
         $schedulePayment = [];
 
         $months = self::getMonthScope();
-        $amount = $loanModel->amount;
-        $term = $loanModel->term;
-        $ratePercent = $loanModel->rate / 100;
-        $startMonth = $loanModel->start_month;
-        $startYear = $loanModel->start_year;
+        $amount = $loan->getAmount();
+        $term = $loan->getTerm();
+        $ratePercent = $loan->getRate() / 100;
+        $startMonth = $loan->getStartMonth();
+        $startYear = $loan->getStartYear();
         $termYear = $term * 12;
 
         $divideRate = $ratePercent / 12;

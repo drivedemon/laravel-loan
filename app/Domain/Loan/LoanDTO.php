@@ -3,6 +3,8 @@
 namespace App\Domain\Loan;
 
 use App\Domain\DTO;
+use Carbon\Traits\Timestamp;
+use Ramsey\Uuid\Type\Integer;
 
 /**
  * Class LoanDTO
@@ -11,56 +13,72 @@ use App\Domain\DTO;
 class LoanDTO extends DTO
 {
     /**
-     * @var integer|null
+     * @var integer
      */
-    protected $userId;
+    protected Integer $id;
     /**
-     * @var integer|null
+     * @var integer
      */
-    protected $loanAmount;
+    protected Integer $userId;
     /**
-     * @var integer|null
+     * @var integer
      */
-    protected $loanTerm;
+    protected Integer $loanAmount;
     /**
-     * @var float|null
+     * @var integer
      */
-    protected $interestRate;
+    protected Integer $loanTerm;
     /**
-     * @var integer|null
+     * @var float
      */
-    protected $startMonth;
+    protected float $interestRate;
     /**
-     * @var integer|null
+     * @var integer
      */
-    protected $startYear;
+    protected Integer $startMonth;
+    /**
+     * @var integer
+     */
+    protected Integer $startYear;
+    /**
+     * @var Timestamp
+     */
+    protected Timestamp $createdAt;
 
     /**
-     * @return integer|null
+     * @return Integer
      */
-    public function getUserId(): integer
+    public function getId(): Integer
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Integer
+     */
+    public function getUserId(): Integer
     {
         return $this->userId;
     }
 
     /**
-     * @return integer|null
+     * @return Integer
      */
-    public function getAmount(): integer
+    public function getAmount(): Integer
     {
         return $this->loanAmount;
     }
 
     /**
-     * @return integer|null
+     * @return Integer
      */
-    public function getTerm(): integer
+    public function getTerm(): Integer
     {
         return $this->loanTerm;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
     public function getRate(): ?float
     {
@@ -68,18 +86,26 @@ class LoanDTO extends DTO
     }
 
     /**
-     * @return integer|null
+     * @return Integer
      */
-    public function getStartMonth(): integer
+    public function getStartMonth(): Integer
     {
         return $this->startMonth;
     }
 
     /**
-     * @return integer|null
+     * @return Integer
      */
-    public function getStartYear(): integer
+    public function getStartYear(): Integer
     {
         return $this->startYear;
+    }
+
+    /**
+     * @return Timestamp
+     */
+    public function getCreatedAt(): Timestamp
+    {
+        return $this->createdAt;
     }
 }

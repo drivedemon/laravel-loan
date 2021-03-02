@@ -32,31 +32,31 @@
                                 <div class="form-group row">
                                     <label for="loan_amount" class="col-sm-4 font-weight-bold col-form-label">{{ __('ID:') }}</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->id }}">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->getId() }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="loan_amount" class="col-sm-4 font-weight-bold col-form-label">{{ __('Loan Amount:') }}</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->amount }} ฿">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->getAmount() }} ฿">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="loan_amount" class="col-sm-4 font-weight-bold col-form-label">{{ __('Loan Term:') }}</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->term }} Years">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->getTerm() }} Years">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="loan_amount" class="col-sm-4 font-weight-bold col-form-label">{{ __('Interest Rate:') }}</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->rate }} %">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->getRate() }} %">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="loan_amount" class="col-sm-4 font-weight-bold col-form-label">{{ __('Created At:') }}</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->created_at }}">
+                                        <input type="text" readonly class="form-control-plaintext" value="{{ $loan->getCreatedAt() }}">
                                     </div>
                                 </div>
                                 <a href="{{ route('loans.index') }}" class="btn btn-secondary">Back</a>

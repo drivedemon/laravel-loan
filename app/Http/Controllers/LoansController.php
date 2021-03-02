@@ -92,7 +92,7 @@ class LoansController extends Controller
      */
     public function show(int $id): Factory|View|Response|Application
     {
-        $loan = $this->loanService->getLoanById($id);
+        $loan = new LoanDTO($this->loanService->getLoanById($id));
         $rePayments = $this->loanService->pmtCalculate($loan);
 
         return view('loans.show',
