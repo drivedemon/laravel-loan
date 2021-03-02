@@ -74,7 +74,7 @@ class LoanRepository implements LoanRepositoryInterface
         return [
             Loan::USER_ID => $loan['user_id'],
             Loan::LOAN_AMOUNT => $loan['loan_amount'],
-            Loan::LOAN_TREM => $loan['loan_term'],
+            Loan::LOAN_TERM => $loan['loan_term'],
             Loan::INTEREST_RATE => $loan['interest_rate'],
             Loan::START_MONTH => $loan['start_month'],
             Loan::START_YEAR => $loan['start_year'],

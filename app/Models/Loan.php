@@ -11,7 +11,7 @@ class Loan extends Model
 
     const USER_ID = 'user_id';
     const LOAN_AMOUNT = 'amount';
-    const LOAN_TREM = 'term';
+    const LOAN_TERM = 'term';
     const INTEREST_RATE = 'rate';
     const START_MONTH = 'start_month';
     const START_YEAR = 'start_year';
@@ -22,9 +22,34 @@ class Loan extends Model
     protected $fillable = [
         self::USER_ID,
         self::LOAN_AMOUNT,
-        self::LOAN_TREM,
+        self::LOAN_TERM,
         self::INTEREST_RATE,
         self::START_MONTH,
         self::START_YEAR,
     ];
+
+    /**
+     * @var mixed
+     */
+    private $id;
+    /**
+     * @var mixed
+     */
+    private $amount;
+    /**
+     * @var mixed
+     */
+    private $term;
+    /**
+     * @var mixed
+     */
+    private $rate;
+    /**
+     * @var mixed
+     */
+    private $start_month;
+    /**
+     * @var mixed
+     */
+    private $start_year;
 }

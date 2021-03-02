@@ -25,7 +25,7 @@ class LoanService
 
     /**
      * @param array $loan
-     * @return Loan
+     * @return array
      */
     public function collectLoan(array $loan): array
     {
@@ -50,9 +50,8 @@ class LoanService
     }
 
     /**
-    * @param array $loan
-    * @return Builder
-    */
+     * @return Builder
+     */
     public function filterLoans(): Builder
     {
         // TODO: implement search filter

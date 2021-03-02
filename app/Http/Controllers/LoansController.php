@@ -5,21 +5,25 @@ namespace App\Http\Controllers;
 use App\Domain\Loan\LoanService;
 use App\Domain\Loan\LoanDTO;
 use App\Http\Requests\CreateLoanRequest;
-use App\Models\Loan;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LoansController extends Controller
 {
     /**
-    * @var LoanService
-    */
+     * @var LoanService
+     */
     private LoanService $loanService;
 
     /**
-    * LoansController constructor.
-    * @param LoanService $loanService
-    */
+     * LoansController constructor.
+     * @param LoanService $loanService
+     */
     public function __construct(LoanService $loanService)
     {
         parent::__construct();
@@ -27,12 +31,12 @@ class LoansController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @param  Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function index(Request $request)
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return Application|Factory|View|Response
+     */
+    public function index(Request $request): Factory|View|Response|Application
     {
         $loan = $this->loanService->getLoans();
         // TODO: integrate seach filter
@@ -47,9 +51,9 @@ class LoansController extends Controller
     /**
     * Show the form for creating a new resource.
     *
-    * @return \Illuminate\Http\Response
+    * @return Application|Factory|View|Response
     */
-    public function create()
+    public function create(): Factory|View|Response|Application
     {
         return view('loans.create',
             [
@@ -60,17 +64,17 @@ class LoansController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  App\Http\Requests\CreateLoanRequest  $request
-    * @return \Illuminate\Http\Response
-    * @throws Exception
-    */
-    public function store(CreateLoanRequest $request)
+     * Store a newly created resource in storage.
+     *
+     * @param CreateLoanRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CreateLoanRequest $request): RedirectResponse
     {
         $loan = New LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
+        die();
         try {
-            $loan = $this->loanService->createLoan($loan);
+            $loan = $this->loanService->createLoan((array) $loan);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }
@@ -82,12 +86,12 @@ class LoansController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function show($id)
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return Application|Factory|View|Response
+     */
+    public function show(int $id): Factory|View|Response|Application
     {
         $loan = $this->loanService->getLoanById($id);
         $rePayments = $this->loanService->pmtCalculate($loan);
@@ -104,9 +108,9 @@ class LoansController extends Controller
     * Show the form for editing the specified resource.
     *
     * @param  int  $id
-    * @return \Illuminate\Http\Response
+    * @return Application|Factory|View|Response
     */
-    public function edit($id)
+    public function edit(int $id): Factory|View|Response|Application
     {
         return view('loans.create',
             [
@@ -118,14 +122,13 @@ class LoansController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  App\Http\Requests\CreateLoanRequest  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    * @throws Exception
-    */
-    public function update(CreateLoanRequest $request, $id)
+     * Update the specified resource in storage.
+     *
+     * @param CreateLoanRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function update(CreateLoanRequest $request, int $id): RedirectResponse
     {
         try {
             $loanModel = $this->loanService->getLoanById($id);
@@ -139,17 +142,18 @@ class LoansController extends Controller
 
         Session()->flash('success', 'Updated successfully');
         return redirect()->action(
-            [LoansController::class, 'show'], $loanModel->id
+            [LoansController::class, 'show'],
+            $loanModel->id
         );
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy($id)
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
     {
         try {
             $this->loanService->deleteLoan($id);
