@@ -28,28 +28,28 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            <form action="{{ isset($loan) ? route('loans.update', $loan->id) : route('loans.store') }}" method="post">
+                            <form action="{{ isset($loan) ? route('loans.update', $loan->getId()) : route('loans.store') }}" method="post">
                                 @csrf
                                 @if (isset($loan))
                                 @method('put')
                                 @endif
-                                <label for="loan_amount">{{ __('Loan Amount') }}</label>
+                                <label for="amount">{{ __('Loan Amount') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="loan_amount" value="{{ $loan->amount ?? '' }}">
+                                    <input type="number" class="form-control" name="amount" value="{{ $loan->getAmount() ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">฿</span>
                                     </div>
                                 </div>
-                                <label for="loan_term">{{ __('Loan Term') }}</label>
+                                <label for="term">{{ __('Loan Term') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="loan_term" value="{{ $loan->term ?? '' }}">
+                                    <input type="number" class="form-control" name="term" value="{{ $loan->getTerm() ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">Years</span>
                                     </div>
                                 </div>
                                 <label for="rate">{{ __('Interest Rate') }}</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" class="form-control" name="interest_rate" step=".01" min="0" value="{{ $loan->rate ?? '' }}">
+                                    <input type="number" class="form-control" name="rate" step=".01" min="0" value="{{ $loan->getRate() ?? '' }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
@@ -62,7 +62,7 @@
                                             @foreach($months as $index => $month)
                                             <option value="{{ $index }}"
                                                 @if (isset($loan))
-                                                    @if ($loan->start_month == $index)
+                                                    @if ($loan->getStartMonth() == $index)
                                                         selected
                                                     @endif
                                                 @endif
@@ -75,7 +75,7 @@
                                             @foreach($years as $index => $year)
                                             <option value="{{ $year }}"
                                                 @if (isset($loan))
-                                                    @if ($loan->start_year == $year)
+                                                    @if ($loan->getStartYear() == $year)
                                                         selected
                                                     @endif
                                                 @endif

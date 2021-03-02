@@ -39,7 +39,6 @@ class LoansController extends Controller
     public function index(Request $request): Factory|View|Response|Application
     {
         $loan = $this->loanService->getLoans();
-        // TODO: integrate seach filter
 
         return view('loans.index',
             [
@@ -73,7 +72,7 @@ class LoansController extends Controller
     {
         try {
             $payload = new LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
-            $loan = $this->loanService->createLoan((array) $payload);
+            $loan = $this->loanService->createLoan((array) $payload->toArray());
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }
@@ -111,9 +110,10 @@ class LoansController extends Controller
      */
     public function edit(int $id): Factory|View|Response|Application
     {
+        $loan = new LoanDTO($this->loanService->getLoanById($id));
         return view('loans.create',
             [
-                'loan' => $this->loanService->getLoanById($id),
+                'loan' => $loan,
                 'months' => $this->loanService->getMonthScope(),
                 'years' => $this->loanService->getYearScope()
             ]
@@ -132,7 +132,7 @@ class LoansController extends Controller
         try {
             $payload = new LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
             $loan = $this->loanService->getLoanById($id);
-            $this->loanService->updateLoan((array) $payload, $loan);
+            $this->loanService->updateLoan((array) $payload->toArray(), $loan);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }

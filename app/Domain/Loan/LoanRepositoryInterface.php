@@ -13,17 +13,17 @@ use Illuminate\Database\Eloquent\Builder;
 interface LoanRepositoryInterface
 {
     /**
-    * @param array $loan
-    * @return Loan
-    */
-    public function createLoan(array $loan): Loan;
+     * @param array $payload
+     * @return Loan
+     */
+    public function createLoan(array $payload): Loan;
 
     /**
-    * @param array $loan
-    * @param Loan $loanModel
-    * @return bool
-    */
-    public function updateLoan(array $loan, Loan $loanModel): bool;
+     * @param array $payload
+     * @param Loan $loanModel
+     * @return bool
+     */
+    public function updateLoan(array $payload, Loan $loanModel): bool;
 
     /**
     * @param string $loanId
@@ -46,10 +46,4 @@ interface LoanRepositoryInterface
     * @return Loan
     */
     public function getLoanById(string $loanId): Loan;
-
-    /**
-    * @param array $loan
-    * @return Loan
-    */
-    public function mapLoan(array $loan): array;
 }

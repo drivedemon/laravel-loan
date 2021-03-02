@@ -24,21 +24,12 @@ class LoanService
     }
 
     /**
-     * @param array $loan
-     * @return array
-     */
-    public function collectLoan(array $loan): array
-    {
-        return $this->repository->mapLoan($loan);
-    }
-
-    /**
-     * @param array $loan
+     * @param array $payload
      * @return Loan
      */
-    public function createLoan(array $loan): Loan
+    public function createLoan(array $payload): Loan
     {
-        return $this->repository->createLoan($loan);
+        return $this->repository->createLoan($payload);
     }
 
     /**
@@ -68,13 +59,13 @@ class LoanService
     }
 
     /**
-     * @param array $loan
+     * @param array $payload
      * @param Loan $loanModel
      * @return bool
      */
-    public function updateLoan(array $loan, Loan $loanModel): bool
+    public function updateLoan(array $payload, Loan $loanModel): bool
     {
-        return $this->repository->updateLoan($loan, $loanModel);
+        return $this->repository->updateLoan($payload, $loanModel);
     }
 
     /**

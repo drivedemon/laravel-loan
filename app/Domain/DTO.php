@@ -21,11 +21,9 @@ class DTO
             return;
         }
         $data = $payload instanceof Request ? $payload->all() : $payload;
-
         $attributes = array_keys(get_object_vars($this));
-        foreach ($data as $key => $value) {
-           $attributeName = Str::camel($key);
-           // dd($data);
+        foreach ($data->toArray() as $key => $value) {
+            $attributeName = Str::camel($key);
             if (!in_array($attributeName, $attributes)) {
                 continue;
             }

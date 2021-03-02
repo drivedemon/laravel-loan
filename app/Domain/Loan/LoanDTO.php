@@ -4,7 +4,6 @@ namespace App\Domain\Loan;
 
 use App\Domain\DTO;
 use Carbon\Traits\Timestamp;
-use Ramsey\Uuid\Type\Integer;
 
 /**
  * Class LoanDTO
@@ -41,9 +40,9 @@ class LoanDTO extends DTO
      */
     protected $startYear;
     /**
-     * @var Timestamp
+     * @var string
      */
-    protected Timestamp $createdAt;
+    protected $createdAt;
 
     /**
      * @return int
@@ -102,9 +101,9 @@ class LoanDTO extends DTO
     }
 
     /**
-     * @return Timestamp|null
+     * @return string|null
      */
-    public function getCreatedAt(): ?Timestamp
+    public function getCreatedAt(): ?string
     {
         return $this->createdAt;
     }

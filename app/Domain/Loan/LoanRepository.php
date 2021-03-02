@@ -3,7 +3,6 @@
 namespace App\Domain\Loan;
 
 use App\Models\Loan;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -13,22 +12,22 @@ use Illuminate\Database\Eloquent\Builder;
 class LoanRepository implements LoanRepositoryInterface
 {
     /**
-    * @param array $loan
+    * @param array $payload
     * @return Loan
     */
-    public function createLoan(array $loan): Loan
+    public function createLoan(array $payload): Loan
     {
-        return Loan::create($loan);
+        return Loan::create($payload);
     }
 
     /**
-    * @param array $loan
+    * @param array $payload
     * @param Loan $loanModel
     * @return bool
     */
-    public function updateLoan(array $loan, Loan $loanModel): bool
+    public function updateLoan(array $payload, Loan $loanModel): bool
     {
-        return $loanModel->update($loan);
+        return $loanModel->update($payload);
     }
 
     /**
@@ -63,21 +62,5 @@ class LoanRepository implements LoanRepositoryInterface
     public function getLoanById(string $loanId): Loan
     {
         return Loan::find($loanId);
-    }
-
-    /**
-    * @param array $loan
-    * @return Loan
-    */
-    public function mapLoan(array $loan): array
-    {
-        return [
-            Loan::USER_ID => $loan['user_id'],
-            Loan::LOAN_AMOUNT => $loan['loan_amount'],
-            Loan::LOAN_TERM => $loan['loan_term'],
-            Loan::INTEREST_RATE => $loan['interest_rate'],
-            Loan::START_MONTH => $loan['start_month'],
-            Loan::START_YEAR => $loan['start_year'],
-        ];
     }
 }
