@@ -35,6 +35,11 @@ Start all containers
 ```
 docker-compose up -d
 ```
+Execute to container
+```
+docker ps (for get container_name list)
+docker exec -it <container_name> bash
+```
 Migrate Data
 ```
 php artisan migrate
