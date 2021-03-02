@@ -12,13 +12,28 @@ cp .env.example .env
 ```
 Access `env` file then change `API and Database` key
 ```
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD="YOUR_PASSWORD_DB"
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=laravel-loan
+DB_USERNAME=admin
+DB_PASSWORD=1234
 ```
 Install Dependencies
 ```
 composer install
+```
+Generate key
+```
+php artisan key:generate
+```
+Build docker
+```
+docker-compose build
+```
+Start all containers
+```
+docker-compose up -d
 ```
 Migrate Data
 ```
