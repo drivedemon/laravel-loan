@@ -27,29 +27,4 @@ class Loan extends Model
         self::START_MONTH,
         self::START_YEAR,
     ];
-
-    /**
-     * @var mixed
-     */
-    private $id;
-    /**
-     * @var mixed
-     */
-    private $amount;
-    /**
-     * @var mixed
-     */
-    private $term;
-    /**
-     * @var mixed
-     */
-    private $rate;
-    /**
-     * @var mixed
-     */
-    private $start_month;
-    /**
-     * @var mixed
-     */
-    private $start_year;
 }

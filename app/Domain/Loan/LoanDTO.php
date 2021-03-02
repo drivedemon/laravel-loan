@@ -13,98 +13,98 @@ use Ramsey\Uuid\Type\Integer;
 class LoanDTO extends DTO
 {
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $id;
+    protected $id;
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $userId;
+    protected $userId;
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $loanAmount;
+    protected $amount;
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $loanTerm;
+    protected $term;
     /**
      * @var float
      */
-    protected float $interestRate;
+    protected $rate;
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $startMonth;
+    protected $startMonth;
     /**
-     * @var integer
+     * @var int
      */
-    protected Integer $startYear;
+    protected $startYear;
     /**
      * @var Timestamp
      */
     protected Timestamp $createdAt;
 
     /**
-     * @return Integer
+     * @return int
      */
-    public function getId(): Integer
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return Integer
+     * @return int
      */
-    public function getUserId(): Integer
+    public function getUserId(): int
     {
         return $this->userId;
     }
 
     /**
-     * @return Integer
+     * @return int|null
      */
-    public function getAmount(): Integer
+    public function getAmount(): ?int
     {
-        return $this->loanAmount;
+        return $this->amount;
     }
 
     /**
-     * @return Integer
+     * @return int|null
      */
-    public function getTerm(): Integer
+    public function getTerm(): ?int
     {
-        return $this->loanTerm;
+        return $this->term;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getRate(): ?float
     {
-        return $this->interestRate;
+        return $this->rate;
     }
 
     /**
-     * @return Integer
+     * @return int|null
      */
-    public function getStartMonth(): Integer
+    public function getStartMonth(): ?int
     {
         return $this->startMonth;
     }
 
     /**
-     * @return Integer
+     * @return int|null
      */
-    public function getStartYear(): Integer
+    public function getStartYear(): ?int
     {
         return $this->startYear;
     }
 
     /**
-     * @return Timestamp
+     * @return Timestamp|null
      */
-    public function getCreatedAt(): Timestamp
+    public function getCreatedAt(): ?Timestamp
     {
         return $this->createdAt;
     }
