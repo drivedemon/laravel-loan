@@ -49,10 +49,10 @@ class LoansController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Application|Factory|View|Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Application|Factory|View|Response
+     */
     public function create(): Factory|View|Response|Application
     {
         return view('loans.create',
@@ -71,10 +71,9 @@ class LoansController extends Controller
      */
     public function store(CreateLoanRequest $request): RedirectResponse
     {
-        $loan = New LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
-        die();
         try {
-            $loan = $this->loanService->createLoan((array) $loan);
+            $payload = new LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
+            $loan = $this->loanService->createLoan((array) $payload);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }
@@ -105,11 +104,11 @@ class LoansController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return Application|Factory|View|Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return Application|Factory|View|Response
+     */
     public function edit(int $id): Factory|View|Response|Application
     {
         return view('loans.create',
@@ -131,11 +130,9 @@ class LoansController extends Controller
     public function update(CreateLoanRequest $request, int $id): RedirectResponse
     {
         try {
-            $loanModel = $this->loanService->getLoanById($id);
-            $this->loanService->updateLoan(
-                $this->loanService->collectLoan(array_merge($request->except('_token'), ['user_id' => \Auth::user()->id])),
-                $loanModel
-            );
+            $payload = new LoanDTO(array_merge($request->except('_token'), ['user_id' => $this->currentUser->id]));
+            $loan = $this->loanService->getLoanById($id);
+            $this->loanService->updateLoan((array) $payload, $loan);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }
@@ -143,7 +140,7 @@ class LoansController extends Controller
         Session()->flash('success', 'Updated successfully');
         return redirect()->action(
             [LoansController::class, 'show'],
-            $loanModel->id
+            $loan->id
         );
     }
 
