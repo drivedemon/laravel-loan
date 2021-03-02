@@ -96,7 +96,6 @@ class LoanService
         $divideRate = $ratePercent / 12;
         $initAmount = $amount * $divideRate;
         $divideAmount = 1 - (1 + $divideRate) ** (-12 * $term);
-        $paymentInterest = $divideRate * $amount;
         $paymentAmount = $initAmount / $divideAmount;
 
         for ($i = 1; $i <= $termYear; $i++) {

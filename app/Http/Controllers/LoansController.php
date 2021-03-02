@@ -110,10 +110,9 @@ class LoansController extends Controller
      */
     public function edit(int $id): Factory|View|Response|Application
     {
-        $loan = new LoanDTO($this->loanService->getLoanById($id));
-        return view('loans.create',
+        return view('loans.update',
             [
-                'loan' => $loan,
+                'loan' => new LoanDTO($this->loanService->getLoanById($id)),
                 'months' => $this->loanService->getMonthScope(),
                 'years' => $this->loanService->getYearScope()
             ]
