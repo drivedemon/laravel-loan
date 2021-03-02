@@ -39,7 +39,4 @@ Migrate Data
 ```
 php artisan migrate
 ```
-Start backend server (You should see the backend up and running on  `localhost:8000`)
-```
-php artisan serve
-```
+Congratulations! Start backend server (You should see the backend up and running on  `localhost:8000`)
